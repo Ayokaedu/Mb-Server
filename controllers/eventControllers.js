@@ -33,7 +33,7 @@ const createEvent = async (req, res) => {
         .json({ success: false, message: "All fields are required" });
     }
     //   image upload request.files
-    const imageFile = req.file.image.tempFilePath;
+    const imageFile = req.files.image.tempFilePath;
     //    upload the image to cloudinary
     const uploadededImage = await cloudinary.uploader.upload(imageFile, {
       use_filename: true,

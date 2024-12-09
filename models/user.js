@@ -34,8 +34,14 @@ const userSchema = new Schema(
           "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
       },
     },
-    resetToken: String,
+    resetToken: String, //
     resetTokenExpiry: Date,
+    yourevents: [
+      {
+        type: mongoose.Schema.Types.ObjectId, // References the Event Model
+        ref: "Event",        
+      },
+    ],
   },
   { timestamps: true }
 );
@@ -48,3 +54,4 @@ userSchema.pre('save', async function (next){
 })
 
 module.exports = mongoose.model('User', userSchema)
+

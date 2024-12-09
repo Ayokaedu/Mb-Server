@@ -73,8 +73,8 @@ const getUpcomingEvents = async (req, res) => {
     const currentDate = new Date();
     const upcomingEvents = await EVENT.find({ date: { $gte: currentDate } })
       .sort("date") // sort by date in ascending order
-      .limit(4)
-      .populate("hostedBy", "ful"); // limit events to 4
+      .limit(6)
+      .populate("hostedBy", "fullName"); // limit events to 4
     res.status(200).json({ success: true, events: upcomingEvents });
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -90,7 +90,7 @@ const getFreeEvents = async (req, res) => {
       "price.free": true,
     })
       .sort("date")
-      .limit(6);
+      .limit(6).populate("hostedBy", "fullName");
     res.status(200).json({ success: true, events: freeEvents });
   } catch (error) {
     res.status(400).json({ message: error.message });
